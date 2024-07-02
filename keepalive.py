@@ -29,7 +29,7 @@ def play_tone() -> None:
     """
     If the device is found through get_output_device_index, will send a tone of 5Mhz (below human hearing) for 1/2
     a second to the device, then turning it off afterwards.
-    :return:
+    :return: None
     """
     output_device_index = get_output_device_index()
     if output_device_index is not None:
