@@ -1,4 +1,4 @@
-name: Package Application with Pyinstaller
+name: Package Windows release
 
 on:
   push:
@@ -17,4 +17,4 @@ jobs:
           spec: 'keepalive.py'
           requirements: 'requirements.txt'
           upload_exe_with_name: 'marshall-keepalive.exe'
-          options: --onefile, --name "marshall-keepalive", 
+          options: --onefile, --name "marshall-keepalive",
