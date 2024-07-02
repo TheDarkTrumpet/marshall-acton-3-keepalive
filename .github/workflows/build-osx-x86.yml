@@ -1,0 +1,20 @@
+name: Package Application with Pyinstaller
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  pyinstaller-build:
+    runs-on: macos-13
+    steps:
+      - name: Create Executable
+        uses: sayyid5416/pyinstaller@v1
+        with:
+          python_ver: '3.12.2'
+          spec: 'keepalive.py'
+          requirements: 'requirements.txt'
+          upload_exe_with_name: 'marshall-keepalive-osx86'
+          options: --onefile, --name "marshall-keepalive",
