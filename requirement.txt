@@ -1,0 +1,4 @@
+numpy==2.0.0
+packaging==23.2
+PyAudio==0.2.14
+schedule==1.2.2
