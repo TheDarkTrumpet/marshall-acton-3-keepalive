@@ -1,4 +1,3 @@
 numpy==2.0.0
 packaging==23.2
-python3-pyaudio
 schedule==1.2.2

@@ -10,6 +10,10 @@ jobs:
   pyinstaller-build:
     runs-on: ubuntu-latest
     steps:
+      - name: Install Requirements
+        uses: ConorMacBride/install-package@v1.1.0
+        with:
+          apt: python3-pyaudio
       - name: Create Executable
         uses: sayyid5416/pyinstaller@v1
         with:
