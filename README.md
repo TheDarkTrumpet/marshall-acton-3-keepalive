@@ -2,7 +2,7 @@
 
 ## Purpose/Reasoning
 
-The Marshall Action 3 is a fantastic Bluetooth speaker system, and one of my 
+The Marshall Acton 3 is a fantastic Bluetooth speaker system, and one of my 
 favorite when it comes to sound quality.  Unfortunately, there's also a setting that turns the
 device off after 10 minutes of inactivity.
 
