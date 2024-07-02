@@ -3,11 +3,17 @@ import numpy as np
 import time
 import schedule
 
+# Override this, if necessary, to match another Bluetooth device
 DEVICE_NAME = 'ACTON III'
 
 
 # Function to get the output device index
-def get_output_device_index():
+def get_output_device_index() -> int | None:
+    """
+    Loops through the devices, looking for the name DEVICE_NAME (defined above) and if found, it returns the
+    index.
+    :return: Device ID, or None if not found
+    """
     p = pyaudio.PyAudio()
     info = p.get_host_api_info_by_index(0)
     device_count = info.get('deviceCount')
@@ -19,12 +25,18 @@ def get_output_device_index():
 
 
 # Function to play the tone
-def play_tone():
+def play_tone() -> None:
+    """
+    If the device is found through get_output_device_index, will send a tone of 5Mhz (below human hearing) for 1/2
+    a second to the device, then turning it off afterwards.
+    :return:
+    """
     output_device_index = get_output_device_index()
     if output_device_index is not None:
         print(f"Sending tone to {DEVICE_NAME}")
         p = pyaudio.PyAudio()
-        stream = p.open(format=pyaudio.paInt16, channels=1, rate=44100, output=True, output_device_index=output_device_index)
+        stream = p.open(format=pyaudio.paInt16, channels=1, rate=44100, output=True,
+                        output_device_index=output_device_index)
         # Generate the tone
         frequency = 5000000  # 5 MHz
         duration = 0.5  # 500ms
