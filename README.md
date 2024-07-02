@@ -24,7 +24,45 @@ resume.
 
 ## How to Run (Using distributables provided)
 
-### Windows
+1. Go to the releases (on the ride side)
+2. Download the relevant release (see table below)
+3. Unzip the file you downloaded
+4. Run the `marshall-keepalive` program (from command line)
+
+### Releases
+| Filename | Architecture | OS |
+|----------|--------------|----|
+| marshall-keepalive-windows.zip | x86 | Windows |
+| marshall-keepalive-osx86.zip | x86 | OSX |
+| marshall-keepalive-osx.zip | aarch64 | OSX |
+| marshall-keepalive-linux.zip | x86 | Linux |
+
+### OSX Special Considerations
+
+The OSX version may need to be allowed through security.  You need to first unzip and run it,
+when OSX complains about it:
+
+1. Go to Settings
+2. Go to Privacy and Security
+3. Click on the button to allow it to "Run Anyways" and enter your pin.
+4. Return to the terminal and run it again.
+
+If you also have problems running this you may need to install portaudio through homebrew:
+
+```text
+brew install portaudio
+```
+
+### Linux Special Considerations
+
+The Linux version was built through Github Actions, on Ubuntu.  It requires the Python module
+for pyaudio installed.
+
+Install it through:
+```text
+sudo apt install python3-pyaudio
+```
+
 ## How to Run (Using source code)
 
 Create your environment, install your requirements, then run the script.
