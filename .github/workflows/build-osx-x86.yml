@@ -11,7 +11,7 @@ jobs:
     runs-on: macos-13
     steps:
       - name: Install Requirements
-        uses: CondorMacBride/install-package@v1
+        uses: ConorMacBride/install-package@v1.1.0
         with:
           brew: portaudio
       - name: Create Executable
