@@ -6,6 +6,8 @@ import schedule
 # Override this, if necessary, to match another Bluetooth device
 DEVICE_NAME = 'ACTON III'
 
+PAUDIO: pyaudio.PyAudio | None = None
+
 
 # Function to get the output device index
 def get_output_device_index() -> int | None:
@@ -14,11 +16,12 @@ def get_output_device_index() -> int | None:
     index.
     :return: Device ID, or None if not found
     """
-    p = pyaudio.PyAudio()
-    info = p.get_host_api_info_by_index(0)
+    global PAUDIO
+    PAUDIO = pyaudio.PyAudio()
+    info = PAUDIO.get_host_api_info_by_index(0)
     device_count = info.get('deviceCount')
     for i in range(0, device_count):
-        device = p.get_device_info_by_index(i)
+        device = PAUDIO.get_device_info_by_index(i)
         if device['name'] == DEVICE_NAME:
             return i
     return None
@@ -31,11 +34,11 @@ def play_tone() -> None:
     a second to the device, then turning it off afterwards.
     :return: None
     """
+    global PAUDIO
     output_device_index = get_output_device_index()
     if output_device_index is not None:
         print(f"Sending tone to {DEVICE_NAME}")
-        p = pyaudio.PyAudio()
-        stream = p.open(format=pyaudio.paInt16, channels=1, rate=44100, output=True,
+        stream = PAUDIO.open(format=pyaudio.paInt16, channels=1, rate=44100, output=True,
                         output_device_index=output_device_index)
         # Generate the tone
         frequency = 5000000  # 5 MHz
@@ -50,15 +53,15 @@ def play_tone() -> None:
         # Turn off the tone
         stream.stop_stream()
         stream.close()
-        p.terminate()
     else:
         print(f"{DEVICE_NAME} not found in output devices, skipping")
+    PAUDIO.terminate()
 
 
-# Schedule the tone-sending function to run every 5 minutes
 schedule.every(5).minutes.do(play_tone)
 
-# Main loop
+# Run it first, then every period of time again after
+play_tone()
 while True:
     schedule.run_pending()
     time.sleep(1)
